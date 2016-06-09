@@ -1,1 +1,1 @@
-web: ./bubblz
+web: bubblz
