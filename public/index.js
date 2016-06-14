@@ -1,8 +1,9 @@
-'use strict';
+"use strict";
 
 var connection;
 var touchData;
 var circle;
+var sounds = {};
 
 function setup() {
   noCursor();
@@ -15,7 +16,8 @@ function setup() {
 
     circle = new Circle(touchData.x, touchData.y);
     Circle.map[circle.key] = circle;
-  }
+  };
+  sounds.electronicChime = loadSound("public/electronic-chime.mp3");
 }
 
 function draw() {
@@ -29,7 +31,7 @@ function touchEnded() {
     circle = new Circle(touchX, touchY);
     Circle.map[circle.key] = circle;
 
-    if (!connection) return
+    if (!connection) return;
     touchData = JSON.stringify({x: touchX, y: touchY});
     connection.send(touchData);
 }

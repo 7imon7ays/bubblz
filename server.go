@@ -39,8 +39,12 @@ func jsCircleHandler(c http.ResponseWriter, req *http.Request) {
 
 func jsIndexHandler(c http.ResponseWriter, req *http.Request) {
 	logRequestPath(req.URL)
-	circleTempl.Execute(c, req.Host)
 	indexTempl.Execute(c, req.Host)
+}
+
+func electronicChimeHandler(c http.ResponseWriter, req *http.Request) {
+	logRequestPath(req.URL)
+	http.ServeFile(c, req, "./public/electronic-chime.mp3")
 }
 
 func logRequestPath(url *url.URL) {
@@ -57,6 +61,7 @@ func main() {
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/public/circle.js", jsCircleHandler)
 	http.HandleFunc("/public/index.js", jsIndexHandler)
+	http.HandleFunc("/public/electronic-chime.mp3", electronicChimeHandler)
 	http.Handle("/ws", wsHandler{h: h})
 	log.Printf("Server running on port %v", *addr)
 	if err := http.ListenAndServe(*addr, nil); err != nil {

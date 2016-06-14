@@ -17,6 +17,11 @@ function Circle(x, y) {
   this.radius = 5;
   this.maxSize = 175 + Math.random() * 175;
   this.age = 0;
+
+  this.sound = sounds.electronicChime;
+  this.sound.setVolume(0.1);
+  this.sound.rate(this.maxSize / 325);
+  this.sound.play();
 }
 
 Circle.drawAll = function () {
